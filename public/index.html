@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Travelling Salesman Problem Solver</title>
+  <script src='https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js'></script>
+</head>
+<body>
+  <h1>Travelling Salesman Problem Solver</h1>
+  <form id='solve-form'>
+    <label for='cities'>Enter cities (x, y):</label>
+    <input type='text' id='cities' name='cities'><br><br>
+    <button type='submit'>Solve</button>
+  </form>
+  <div id='solution'></div>
+
+  <script>
+    const form = document.getElementById('solve-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const cities = document.getElementById('cities').value;
+      const response = await axios.post('/solve', { cities });
+      document.getElementById('solution').innerHTML = `Solution: ${response.data}`;
+    });
+  </script>
+</body>
+</html>
